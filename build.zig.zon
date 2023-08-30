@@ -1,0 +1,11 @@
+.{
+    .name = "ftxui-sample",
+    .version = "0.1.0",
+
+    .dependencies = .{
+        .ftxui = .{
+            .url = "https://github.com/JoMazM/FTXUI/archive/b9149612b961d4b0a6e1474915231bcbc9a738cd.tar.gz",
+            .hash = "122048cb2687331728ff3dedb7e0682a54fba2972a825c1690338075d832b759f06c",
+        },
+    },
+}
