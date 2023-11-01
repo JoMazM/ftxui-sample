@@ -20,12 +20,12 @@ pub fn build(b: *std.build.Builder) void {
     exe.linkLibCpp();
     exe.addIncludePath(.{ .path = "src" });
 
-    exe.addCSourceFiles(&.{
+    exe.addCSourceFiles(.{ .files = &.{
         "src/main.cpp",
-    }, &.{
+    }, .flags = &.{
         "-std=c++17",
         "-fno-rtti",
         "-fno-exceptions",
-    });
+    } });
     b.installArtifact(exe);
 }

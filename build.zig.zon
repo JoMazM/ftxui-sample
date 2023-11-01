@@ -1,11 +1,12 @@
 .{
     .name = "ftxui-sample",
     .version = "0.1.0",
+    .paths = .{""},
 
     .dependencies = .{
         .ftxui = .{
-            .url = "https://github.com/JoMazM/FTXUI/archive/b9149612b961d4b0a6e1474915231bcbc9a738cd.tar.gz",
-            .hash = "122048cb2687331728ff3dedb7e0682a54fba2972a825c1690338075d832b759f06c",
+            .url = "https://github.com/JoMazM/FTXUI/archive/a5ce2a3062c25539b23557aa5bf3938397bf9c9b.tar.gz",
+            .hash = "12204c39c40aa7d4138448c38be34708daea18ac66116d392aef12406e2cffdbe9a7",
         },
     },
 }
