@@ -1,0 +1,94 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "shell",
+			"label": "Zig build",
+			"command": "zig",
+			"args": [
+				"build",
+				"-Dtarget=${input:selectedTarget}", 
+				"-Doptimize=${input:optimizationType}",
+			],
+			"options": {
+				"cwd": ""
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"detail": "compiler: zig"
+		},
+		{
+			"type": "shell",
+			"label": "ADB Push",
+			"command":"adb  -s ${input:adbDevices} push ${workspaceFolder}/zig-out/bin/${input:binaryFiles} /home/root && adb  -s ${input:adbDevices} shell echo \"chmod +x /home/root/${input:binaryFiles}\"",
+			"problemMatcher":[],
+			// "dependsOn":["Zig build"]
+		},
+		{
+			"type": "shell",
+			"label": "ADB Shell",
+			"command":"adb  -s ${input:adbDevices} shell",
+			"problemMatcher":[]
+		},
+	],
+	"inputs": [
+		{
+			"type": "pickString",
+			"id": "optimizationType",
+			"description": "Optimization options:",
+			"options": [
+			  "Debug",
+			  "ReleaseSafe",
+			  "ReleaseFast",
+			  "ReleaseSmall",
+			],
+			"default": "ReleaseSmall"
+		},
+		{
+			"type": "pickString",
+			"id": "selectedTarget",
+			"description": "Target Architecture:",
+			"options": [
+				"aarch64-linux-gnu",
+				"x86_64-linux-gnu",
+				"x86_64-linux-gnux32",
+				"x86_64-linux-musl",
+				"x86_64-windows-gnu",
+			],
+			"default": "x86_64-windows-gnu"
+		},
+		{
+			"id": "adbDevices",
+			"type": "command",
+			"command": "shellCommand.execute",
+			"args": {
+				"command": "echo off & for /f \"tokens=1*\" %A in ('adb devices') do echo %A",
+				"cwd": "${workspaceFolder}",
+				"env": {
+					"WORKSPACE": "${workspaceFolder[0]}",
+					"FILE": "${file}",
+					"PROJECT": "${workspaceFolderBasename}"
+				}
+			}
+		},
+		{
+			"id": "binaryFiles",
+			"type": "command",
+			"command": "shellCommand.execute",
+			"args": {
+				"command": "dir /b",
+				"cwd": "${workspaceFolder}/zig-out/bin/",
+				"env": {
+					"WORKSPACE": "${workspaceFolder[0]}",
+					"FILE": "${file}",
+					"PROJECT": "${workspaceFolderBasename}"
+				}
+			}
+		},
+	]
+}
