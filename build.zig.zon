@@ -1,11 +1,11 @@
 .{
-    .name = "file-explorer",
+    .name = "ftxui-sample",
     .version = "0.1.0",
     .paths = .{""},
     .dependencies = .{
         .ftxui = .{
-            .url = "https://github.com/JoMazM/FTXUI/archive/637a23e25d113cc1e4044e18a431e8fc97c2d7df.tar.gz",
-            .hash = "1220f75e145e6af5a5f3d6d643ba9d1b482c2ae82d0f987b0ae0dffe885c7ce13c14",
+            .url = "https://github.com/JoMazM/FTXUI/archive/a879ef4790870d57d585e0d9f2de5a116b26b6cf.tar.gz",
+            .hash = "12202bc8726e9f4a841c7906bc7388239cdda343c1af6509af7e2eac90e5ad69c56d",
         },
     },
 }

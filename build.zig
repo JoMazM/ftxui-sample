@@ -11,7 +11,7 @@ pub fn build(b: *std.Build) void {
     });
 
     const exe = b.addExecutable(.{
-        .name = "file-explorer",
+        .name = "ftxui-sample",
         .target = target,
         .optimize = optimize,
     });
@@ -23,8 +23,7 @@ pub fn build(b: *std.Build) void {
     // exe.addIncludePath(.{ .path = "res" });
     exe.addIncludePath(.{ .path = "3rdparty" });
 
-    // if (target.Os.Tag == .windows)
-    if (exe.isWindows())
+    if (target.result.os.tag == .windows)
         exe.defineCMacro("WIN32", null);
 
     exe.addCSourceFiles(.{
@@ -35,7 +34,7 @@ pub fn build(b: *std.Build) void {
         },
         .flags = &.{
             "-std=c++23",
-            "-fno-rtti",
+            "-frtti",
             // "-fno-exceptions",
             "-fexceptions",
             "-fno-lto", // workaround for compiling on widnows
