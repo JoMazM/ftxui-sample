@@ -5,8 +5,8 @@
 
     .dependencies = .{
         .ftxui = .{
-            .url = "https://github.com/JoMazM/FTXUI/archive/a5ce2a3062c25539b23557aa5bf3938397bf9c9b.tar.gz",
-            .hash = "12204c39c40aa7d4138448c38be34708daea18ac66116d392aef12406e2cffdbe9a7",
+            .url = "https://github.com/JoMazM/FTXUI/archive/093edd81e870565e27ac9359ed1b12fdc7cfc6ac.tar.gz",
+            .hash = "12207f6bdc1d9c0763237a0b702455f8e31319fe5106bdf1b6f600dd73d7280492b0",
         },
     },
 }

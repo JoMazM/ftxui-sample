@@ -1,6 +1,6 @@
 const std = @import("std");
 
-pub fn build(b: *std.build.Builder) void {
+pub fn build(b: *std.Build) void {
     const target = b.standardTargetOptions(.{});
     const optimize = b.standardOptimizeOption(.{});
 
@@ -18,7 +18,8 @@ pub fn build(b: *std.build.Builder) void {
     exe.linkLibrary(ftxui_dep.artifact("screen"));
     exe.linkLibrary(ftxui_dep.artifact("component"));
     exe.linkLibCpp();
-    exe.addIncludePath(.{ .path = "src" });
+    exe.addIncludePath(b.path("src"));
+    // exe.addWin32ResourceFile(.{ .file = .{}, .flags = &.{} });
 
     exe.addCSourceFiles(.{ .files = &.{
         "src/main.cpp",
