@@ -1,0 +1,83 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "Zig build",
+            "command": "zig",
+            "reveal": "always",
+            "args": [
+                "build",
+                "${input:genCompDB}", 
+                "-Dtarget=${input:selectedTarget}", 
+                "-Doptimize=${input:optimizationType}",
+            ],
+            "options": {
+                "cwd": ""
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+        },
+        {
+            "label": "Zig clean",
+            "dependsOn":["Remove zig-out","Remove zig cache"],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+        },
+        {
+            "type": "shell",
+            "hide": "true",
+            "label": "Remove zig-out",
+            "command": "rm -Rf zig-out/",
+        },
+        {
+            "type": "shell",
+            "hide": "true",
+            "label": "Remove zig cache",
+            "command": "rm -Rf .zig-cache/ ",
+        },
+    ],
+    "inputs": [
+        {
+            "type": "pickString",
+            "id": "genCompDB",
+            "description": "Generate compiler database:",
+            "options": [
+              "cdb"
+            ],
+            "default": ""
+        },
+        {
+            "type": "pickString",
+            "id": "optimizationType",
+            "description": "Optimization options:",
+            "options": [
+              "Debug",
+              "ReleaseSafe",
+              "ReleaseFast",
+              "ReleaseSmall",
+            ],
+            "default": "Debug"
+        },
+        {
+            "type": "pickString",
+            "id": "selectedTarget",
+            "description": "Target Architecture:",
+            "options": [
+                "aarch64-linux-gnu",
+                "x86_64-linux-gnu",
+                "x86_64-linux-gnux32",
+                "x86_64-linux-musl",
+                "x86_64-windows-gnu",
+            ],
+            "default": "x86_64-linux-gnu"
+        },
+    ]
+}

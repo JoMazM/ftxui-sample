@@ -1,8 +1,6 @@
-#include <memory>  // for allocator, __shared_ptr_access, shared_ptr
 #include <string>  // for string, basic_string
 #include <vector>  // for vector
  
-#include "ftxui/component/captured_mouse.hpp"  // for ftxui
 #include "ftxui/component/component.hpp"  // for Radiobox, Horizontal, Menu, Renderer, Tab
 #include "ftxui/component/component_base.hpp"      // for ComponentBase
 #include "ftxui/component/screen_interactive.hpp"  // for ScreenInteractive
@@ -14,7 +12,6 @@ using namespace ftxui;
 int main() {
     // Table --------------------------
     auto renderTable= [&] {
-
   auto table = Table({
       {"Version", "Marketing name", "Release date", "API level", "Runtime"},
       {"2.3", "Gingerbread", "February 9 2011", "10", "Dalvik 1.4.0"},
@@ -34,9 +31,7 @@ int main() {
       {"10", "10", "September 3 2019", "29", "ART"},
       {"11", "11", "September 8 2020", "30", "ART"},
   });
- 
   table.SelectAll().Border(LIGHT);
- 
   // Add border around the first column.
   table.SelectColumn(0).Border(LIGHT);
  
@@ -114,7 +109,6 @@ int main() {
   });
  
     // Render ------------------------
-
-  auto screen = ScreenInteractive::TerminalOutput();
-  screen.Loop(renderer);
+    auto screen = ScreenInteractive::TerminalOutput();
+    screen.Loop(renderer);
 }
