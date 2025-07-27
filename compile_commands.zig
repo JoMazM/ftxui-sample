@@ -57,6 +57,7 @@ fn extractIncludeDirsFromCompileStepInner(b: *std.Build, step: *std.Build.Step.C
             .path_system => |path| lazy_path_output.append(path) catch @panic("OOM"),
             // TODO: support this
             .config_header_step => {},
+            .embed_path => {},
             // TODO: test these...
             .framework_path => |path| {
                 std.log.warn("Found framework include path- compile commands generation for this is untested.", .{});
@@ -216,11 +217,11 @@ fn getCSources(b: *std.Build, steps: []const *std.Build.Step.Compile) []*Absolut
     return res.toOwnedSlice() catch @panic("OOM");
 }
 
-fn makeCdb(step: *std.Build.Step, prog_node: std.Progress.Node) anyerror!void {
+fn makeCdb(step: *std.Build.Step, make_opts: std.Build.Step.MakeOptions) anyerror!void {
     if (compile_steps == null) {
         @panic("No compile steps registered. Programmer error in createStep");
     }
-    _ = prog_node;
+    _ = make_opts;
     const allocator = step.owner.allocator;
     const b = step.owner;
     // NOTE: these are not sane defaults really, but atm I don't care about accurately providing the
