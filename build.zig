@@ -6,8 +6,7 @@ pub fn build(b: *std.Build) void {
     // var targets = std.ArrayList(*std.Build.Step.Compile).init(b.allocator);
     const target = b.standardTargetOptions(.{});
     const optimize = b.standardOptimizeOption(.{});
-    
-    // External option
+
     // External option
     const linkage = b.option(std.builtin.LinkMode, "linkage", "Link mode for FTXUI libraries") orelse .static;
 
@@ -16,7 +15,7 @@ pub fn build(b: *std.Build) void {
     } else {
         std.log.debug("static", .{});
     }
-    }
+
     const root_module_opts: std.Build.Module.CreateOptions = .{
         .root_source_file = null,
         .target = target,
@@ -40,9 +39,9 @@ pub fn build(b: *std.Build) void {
     // compile_commands.json. could be named anything. cdb is just quick to type
     // zcc.createStep(b, "cdb", targets.toOwnedSlice() catch @panic("OOM"));
 
-    // exe.linkLibrary(ftxui_dep.artifact("dom"));
+    exe.linkLibrary(ftxui_dep.artifact("dom"));
     exe.linkLibrary(ftxui_dep.artifact("screen"));
-    // exe.linkLibrary(ftxui_dep.artifact("component"));
+    exe.linkLibrary(ftxui_dep.artifact("component"));
     exe.addIncludePath(b.path("src"));
     // exe.addWin32ResourceFile(.{ .file = .{}, .flags = &.{} });
 
